@@ -1,4 +1,4 @@
-//////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////
 
 /* CE1007/CZ1007 Data Structures
 Lab Test: Section E - Binary Trees Questions
@@ -105,7 +105,13 @@ int main()
 
 void mirrorTree(BTNode *node)
 {
-	/* add your code here */
+    if (node == NULL) return;
+    if (node->left == NULL && node->right == NULL) return;
+    mirrorTree(node->left);
+    mirrorTree(node->right);
+    BTNode* newN = node->left;
+    node->left = node->right;
+    node->right = newN;
 }
 
 //////////////////////////////////////////////////////////////////////////////////

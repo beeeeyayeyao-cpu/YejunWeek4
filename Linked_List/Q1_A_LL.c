@@ -16,6 +16,7 @@ typedef struct _listnode{
 	struct _listnode *next;
 } ListNode;			// You should not change the definition of ListNode
 
+
 typedef struct _linkedlist{
 	int size;
 	ListNode *head;
@@ -90,7 +91,20 @@ int main()
 
 int insertSortedLL(LinkedList *ll, int item)
 {
-	/* add your code here */
+	for (int i = 0; i < ll->size; i++)
+	{
+		if (findNode(ll, i)->item == item)
+		{
+			return -1;
+		}
+		else if (findNode(ll, i)->item > item)
+		{
+			insertNode(ll, i, item);
+			return i;
+		}
+	}
+	insertNode(ll, ll->size, item);
+	return ll->size-1;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -126,7 +140,6 @@ void removeAllItems(LinkedList *ll)
 	ll->head = NULL;
 	ll->size = 0;
 }
-
 
 ListNode *findNode(LinkedList *ll, int index){
 

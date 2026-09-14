@@ -86,8 +86,106 @@ int main()
 
 void moveEvenItemsToBack(LinkedList *ll)
 {
-	/* add your code here */
+	ListNode* evenHead = NULL;
+	ListNode* eventail = NULL;
+	ListNode* oddHead = NULL;
+	ListNode* oddtail = NULL;
+	ListNode* currentN = ll->head;
+	while (currentN!=NULL)
+	{
+		ListNode* saveNode = currentN->next;
+		currentN->next = NULL;
+		if (currentN->item % 2 == 0)
+		{
+			if (evenHead == NULL)
+			{
+				evenHead = eventail = currentN;
+			}
+			else
+			{
+				eventail->next = currentN;
+				eventail = currentN;
+			}
+		}
+		else
+		{
+			if (oddHead == NULL)
+			{
+				oddHead = oddtail = currentN;
+			}
+			else
+			{
+				oddtail->next = currentN;
+				oddtail = currentN;
+			}
+		}
+		currentN = saveNode;
+	}
+	if (oddtail != NULL)
+	{
+		oddtail->next = evenHead;
+		ll->head = oddHead;
+	}
+	else
+	{
+		ll->head = evenHead;
+	}
 }
+
+int moveMaxToFront(ListNode** ptrHead)
+{
+	ListNode* curr = *ptrHead;
+	int maxValue = 0;
+	ListNode* maxNode = curr;
+	while (curr != NULL)
+	{
+		if (curr->item > maxValue)
+		{
+			maxValue = curr->item;
+			maxNode = curr;
+		}
+		curr = curr->next;
+	}
+	ListNode* curr2 = *ptrHead;
+	ListNode* preN = NULL;
+	while (curr2 != NULL)
+	{
+		if (curr2 == maxNode)
+		{
+			if (preN != NULL)
+			{
+				preN->next = curr2->next;
+			}
+			ListNode* saveN = *ptrHead;
+			*ptrHead = curr2;
+			curr2->next = saveN;
+			break;
+		}
+		preN = curr2;
+		curr2 = curr2->next;
+	}
+}
+
+void RecursiveReverse(ListNode** ptrHead)
+{
+	ListNode* cur = *ptrHead;
+	if (cur->next == NULL)
+	{
+		return;
+	}
+	*ptrHead = cur->next;
+	RecursiveReverse(ptrHead);
+	cur->next = NULL;
+	ListNode* oCur = *ptrHead;
+	ListNode* nCur = oCur;
+	while (nCur->next != NULL)
+	{
+		nCur = nCur->next;
+	}
+	nCur->next = cur;
+	*ptrHead = oCur;
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////////
 

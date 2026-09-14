@@ -85,11 +85,25 @@ int main()
 
 ////////////////////////////////////////////////////////////////////////
 
-void RecursiveReverse(ListNode **ptrHead)
+void RecursiveReverse(ListNode** ptrHead)
 {
-	/* add your code here */
+	ListNode* cur = *ptrHead;
+	if (cur->next == NULL)
+	{
+		return;
+	}
+	*ptrHead = cur->next;
+	RecursiveReverse(ptrHead);
+	cur->next = NULL;
+	ListNode* oCur = *ptrHead;
+	ListNode* nCur = oCur;
+	while (nCur->next != NULL)
+	{
+		nCur = nCur->next;
+	}
+	nCur->next = cur;
+	*ptrHead = oCur;
 }
-
 //////////////////////////////////////////////////////////////////////////////////
 
 void printList(LinkedList *ll){

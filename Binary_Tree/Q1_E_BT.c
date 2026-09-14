@@ -61,9 +61,7 @@ int main()
     while(c != 0){
         printf("Please input your choice(1/2/3/0): ");
         if(scanf("%d", &c) > 0)
-
         {
-
             switch(c)
             {
             case 1:
@@ -113,10 +111,15 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-int identical(BTNode *tree1, BTNode *tree2)
-
+int identical(BTNode* tree1, BTNode* tree2)
 {
-   /* add your code here */
+    if (tree1 == NULL && tree2 == NULL) return 1;
+    if (tree1 != NULL && tree2 == NULL) return 0;
+    if (tree1 == NULL && tree2 != NULL) return 0;
+    if (tree1->item != tree2->item) return 0;
+    if (identical(tree1->left, tree2->left) == 0) return 0;
+    if (identical(tree1->right, tree2->right) == 0) return 0;
+    return 1;
 }
 
 /////////////////////////////////////////////////////////////////////////////////

@@ -103,7 +103,26 @@ int main()
 
 int isStackPairwiseConsecutive(Stack *s)
 {
-  /* add your code here */
+	if (s->ll.size % 2 == 1) return 0;
+	int preItem = NULL;
+	while (s->ll.size > 0)
+	{
+		int currentItem = pop(s);
+		printf("%d", currentItem);
+		if (preItem == NULL)
+		{
+			preItem = currentItem;
+		}
+		else if (preItem - 1 != currentItem)
+		{
+			return 0;
+		}
+		else
+		{
+			preItem = NULL;
+		}
+	}
+	return 1;
 }
 
 //////////////////////////////////////////////////////////////////////////////////
